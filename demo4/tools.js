@@ -1,16 +1,9 @@
-// image spider (google ver.)
-const puppeteer = require("puppeteer");
-const path = require("path");
-const { promisify } = require("util");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
-
-const folder = "/download";
-const target = path.join(__dirname, folder);
-if (!fs.existsSync(target)) {
-  fs.mkdirSync(target);
-}
+const path = require("path");
+const chalk = require("chalk");
+const { promisify } = require("util");
 
 // url => image
 const url2Img = promisify((url, dir, callback) => {
@@ -55,7 +48,7 @@ const convert2Img = async (src, dir) => {
 };
 
 const autoScroll = async page => {
-  console.log("scrolling this page to the footer...");
+  console.log(chalk.white.bgGreen.bold("scrolling this page to the footer..."));
   await page.evaluate(async () => {
     await new Promise((resolve, reject) => {
       let totalHeight = 0;
@@ -74,37 +67,4 @@ const autoScroll = async page => {
   });
 };
 
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto("https://www.google.com/imghp?hl=zh-CN");
-  console.log("go to https://www.google.com/imghp?hl=zh-CN");
-
-  await page.focus("#lst-ib");
-  await page.keyboard.sendCharacter("狗");
-  await page.waitFor("#mKlEF");
-  await page.click("#mKlEF");
-  console.log("go to search list");
-
-  page.on("load", async () => {
-    await autoScroll(page);
-
-    console.log("page loading done, start fetch...");
-
-    const srcs = await page.evaluate(() => {
-      const images = document.querySelectorAll("img.rg_ic");
-      return Array.prototype.map.call(images, img => img.src);
-    });
-    console.log(`get ${srcs.length} images, start download`);
-
-    for (let i = 0; i < srcs.length; i++) {
-      // sleep
-      await page.waitFor(Math.random() * 5000 + 5000);
-      await convert2Img(srcs[i], target);
-      console.log(`finished ${i + 1}/${srcs.length} images`);
-    }
-
-    console.log(`job finished!`);
-    await browser.close();
-  });
-})();
+module.exports = { convert2Img, autoScroll };

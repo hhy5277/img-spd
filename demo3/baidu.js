@@ -13,7 +13,7 @@ if (!fs.existsSync(target)) {
 }
 
 // url => image
-const urlToImg = promisify((url, dir, callback) => {
+const url2Img = promisify((url, dir, callback) => {
   const mod = /^https:/.test(url) ? https : http;
   const ext = path.extname(url);
   const file = path.join(dir, `${Date.now()}${ext}`);
@@ -27,7 +27,7 @@ const urlToImg = promisify((url, dir, callback) => {
 });
 
 // base64 => image
-const base64ToImg = async function(base64Str, dir) {
+const base642Img = async function(base64Str, dir) {
   // data:image/jpeg;base64,/asdasda
 
   const matches = base64Str.match(/^data:(.+?);base64,(.+)$/);
@@ -45,12 +45,12 @@ const base64ToImg = async function(base64Str, dir) {
   }
 };
 
-const convertToImg = async (src, dir) => {
+const convert2Img = async (src, dir) => {
   if (/^https:/.test(src)) {
-    await urlToImg(src, dir);
+    await url2Img(src, dir);
   } else {
     console.log("======src======:", src.slice(0, 50));
-    await base64ToImg(src, dir);
+    await base642Img(src, dir);
   }
 };
 
@@ -100,7 +100,7 @@ const autoScroll = async page => {
     for (let i = 0; i < srcs.length; i++) {
       // sleep
       await page.waitFor(Math.random() * 5000);
-      await convertToImg(srcs[i], target);
+      await convert2Img(srcs[i], target);
       console.log(`finished ${i + 1}/${srcs.length} images`);
     }
 

@@ -1,3 +1,6 @@
 /node_modules
 /demo*/download
 /demo*/*.json
+/demo*/node_modules
+/commander/node_modules
+.vscode
