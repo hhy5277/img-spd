@@ -8,7 +8,9 @@ const program = require("commander");
 const inquirer = require("inquirer");
 const chalk = require("chalk");
 const { convert2Img, autoScroll } = require("./tools");
+const consoler = require("./consoler");
 
+console.log(chalk.green(consoler()));
 program
   .version("1.0.0", "-v --version")
   .description("image-spider")
@@ -31,7 +33,6 @@ program
     console.log(chalk.yellow("=============================="));
     console.log(chalk.green ("image-spider start up!ヽ( ^∀^)ﾉ"));
     console.log(chalk.yellow("=============================="));
-    console.log(JSON.stringify(config));
     if (!config.key) {
       promps.push({
         type: "input",
@@ -76,7 +77,6 @@ program
 
     inquirer.prompt(promps).then(function(answers) {
       const { key, interval, number, headless } = answers;
-      console.log('=====', typeof number)
       const folder = `/${key}`;
       const target = path.join(__dirname, folder);
       if (!fs.existsSync(target)) {
