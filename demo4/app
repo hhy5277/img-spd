@@ -10,10 +10,10 @@ const chalk = require("chalk");
 const { convert2Img, autoScroll } = require("./tools");
 const consoler = require("./consoler");
 
-console.log(chalk.green(consoler()));
+console.log(chalk.cyan(consoler()));
 program
   .version("1.0.0", "-v --version")
-  .description("image-spider")
+  .description("image spider is a spider grap images from baidu.")
   .option("-k, --key [key]", "input the image keywords to download")
   .option("-i, --interval [interval]", "input the operation interval(ms,default 200)", parseFloat)
   .option("-n, --number [number]", "input the operation interval(ms,default 200)", parseInt)
@@ -30,9 +30,9 @@ program
     );
     var promps = [];
 
-    console.log(chalk.yellow("=============================="));
-    console.log(chalk.green ("image-spider start up!ヽ( ^∀^)ﾉ"));
-    console.log(chalk.yellow("=============================="));
+    console.log(chalk.yellow("================================================================"));
+    console.log(chalk.green ("Image spider version 1.2.0 designed by zhl "));
+    console.log(chalk.yellow("================================================================"));
     if (!config.key) {
       promps.push({
         type: "input",
@@ -53,7 +53,7 @@ program
         type: "input",
         name: "interval",
         default: 200,
-        message: "Please input the operation interval(ms,default 200)"
+        message: "Please input the operation interval(ms)"
       });
     }
 
@@ -62,7 +62,7 @@ program
         type: "input",
         name: "number",
         default: 20,
-        message: "Please input the download numbers(1-1000,default 20)"
+        message: "Please input the download numbers(1-1000)"
       });
     }
 
@@ -123,7 +123,7 @@ program
             );
           }
 
-          console.log(chalk.blue.bgRed.bold(`job finished!`));
+          console.log(chalk.bgGreen.bold(`job finished!`));
           await browser.close();
         });
       };

@@ -61,6 +61,8 @@ const autoScroll = async page => {
         if (totalHeight >= scrollHeight) {
           clearInterval(timer);
           resolve();
+        } else {
+          console.log(`current progress => ${scrollHeight} / ${totalHeight}`);
         }
       }, 200);
     });
