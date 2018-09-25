@@ -86,9 +86,11 @@ program
       const spider = async () => {
         const browser = await puppeteer.launch({ headless: headless });
         const page = await browser.newPage();
+        await page.setViewport({ width: 5000, height: 800, });
         await page.goto("https://image.baidu.com");
         console.log(chalk.yellow("go to https://image.baidu.com"));
 
+        await page.waitFor(100000);
         await page.focus("#kw");
         await page.keyboard.sendCharacter(key);
         await page.waitFor(".s_search");

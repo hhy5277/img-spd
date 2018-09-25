@@ -2,7 +2,7 @@
 const puppeteer = require("puppeteer");
 const fs = require('fs')
 
-let spider = async () => {
+const spider = async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 

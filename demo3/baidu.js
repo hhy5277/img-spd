@@ -81,7 +81,7 @@ const autoScroll = async page => {
   console.log("go to https://image.baidu.com");
 
   await page.focus("#kw");
-  await page.keyboard.sendCharacter("狗");
+  await page.keyboard.sendCharacter("猫咪");
   await page.waitFor(".s_search");
   await page.click(".s_search");
   console.log("go to search list");
