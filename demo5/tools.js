@@ -42,7 +42,6 @@ const convert2Img = async (src, dir) => {
   if (/^https:/.test(src)) {
     await url2Img(src, dir);
   } else {
-    console.log("======src======:", src.slice(0, 50));
     await base642Img(src, dir);
   }
 };
