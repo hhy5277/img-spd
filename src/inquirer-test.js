@@ -96,5 +96,5 @@ const questions = [
 
 inquirer.prompt(questions).then(answers => {
   console.log('\nOrder receipt:');
-  console.log(JSON.stringify(answers));
+  console.log(answers);
 });
