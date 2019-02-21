@@ -4,6 +4,7 @@
 const puppeteer = require("puppeteer");
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 const program = require("commander");
 const inquirer = require("inquirer");
 const chalk = require("chalk");
@@ -77,12 +78,16 @@ program
 
     inquirer.prompt(promps).then(function(answers) {
       const { key, interval, number, headless } = answers;
-      const folder = `/${key}`;
-      const target = path.join(__dirname, folder);
+      const home = os.homedir();
+      const folder = 'img-spd';
+      const base = path.join(home, folder);
+      const target = path.join(base, key)
+      if (!fs.existsSync(base)) {
+        fs.mkdirSync(base);
+      }
       if (!fs.existsSync(target)) {
         fs.mkdirSync(target);
       }
-
       const spider = async () => {
         const browser = await puppeteer.launch({ headless: headless });
         const page = await browser.newPage();
@@ -124,7 +129,7 @@ program
             );
           }
 
-          console.log(chalk.bgGreen.bold(`job finished!`));
+          console.log(chalk.green.bold(`job finished! The images are stored in ${target}`));
           await browser.close();
         });
       };
