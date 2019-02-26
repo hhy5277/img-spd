@@ -45,3 +45,7 @@ demo3 - trace
 demo4 - image spider
 
 src - image spider app
+
+## License
+
+MIT
