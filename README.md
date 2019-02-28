@@ -34,18 +34,6 @@ Options:
   -h, --help                 output usage information
 ```
 
-## Contents
-
-demo1 - screen shot
-
-demo2 - book info spider
-
-demo3 - trace
-
-demo4 - image spider
-
-src - image spider app
-
 ## License
 
 MIT
